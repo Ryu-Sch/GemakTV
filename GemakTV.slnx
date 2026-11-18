@@ -1,0 +1,16 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/GemakTV.Domain/GemakTV.Domain.csproj" />
+    <Project Path="src/GemakTV.Application/GemakTV.Application.csproj" />
+    <Project Path="src/GemakTV.Infrastructure/GemakTV.Infrastructure.csproj" />
+    <Project Path="src/GemakTV.Tv/GemakTV.Tv.csproj" />
+    <Project Path="src/GemakTV.Manager/GemakTV.Manager.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/GemakTV.Publisher/GemakTV.Publisher.csproj" />
+    <Project Path="tools/GemakTV.FakeGitHub/GemakTV.FakeGitHub.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/GemakTV.Tests/GemakTV.Tests.csproj" />
+  </Folder>
+</Solution>

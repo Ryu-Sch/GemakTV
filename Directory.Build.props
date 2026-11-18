@@ -1,0 +1,18 @@
+<Project>
+  <!-- Shared settings for every project in the repository. -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Company>GemakTV</Company>
+    <Product>GemakTV</Product>
+    <Authors>Ryu</Authors>
+    <!-- Smart App Control blocks freshly built unsigned .exe files on the dev machine:
+         desktop tools and tests run through the signed `dotnet` host instead. -->
+    <UseAppHost>false</UseAppHost>
+    <!-- Where the GitHub repository lives. Both apps read the published config from here. -->
+    <GemakRepoOwner>Ryu-Sch</GemakRepoOwner>
+    <GemakRepoName>GemakTV</GemakRepoName>
+    <GemakPublishBranch>published</GemakPublishBranch>
+  </PropertyGroup>
+</Project>

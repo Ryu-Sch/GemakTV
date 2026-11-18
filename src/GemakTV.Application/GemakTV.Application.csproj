@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Use cases shared by the TV app, the manager app and the publisher tool. Talks to the outside world only through the ports in Ports/. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsTrimmable>true</IsTrimmable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GemakTV.Domain\GemakTV.Domain.csproj" />
+  </ItemGroup>
+</Project>

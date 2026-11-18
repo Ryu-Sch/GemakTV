@@ -1,0 +1,21 @@
+# Build output
+bin/
+obj/
+artifacts/
+*.user
+*.suo
+.vs/
+.idea/
+*.DotSettings.user
+TestResults/
+
+# Secrets never belong in this public repository. They live outside the repo
+# (default: %USERPROFILE%\.gemaktv). These patterns are a second line of defence.
+secrets/
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.pass
+config.key
+signing.json
