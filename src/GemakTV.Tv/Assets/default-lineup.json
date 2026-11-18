@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "channels": [
+    {
+      "id": "KykNet.za",
+      "name": "KykNet",
+      "logo": "https://i.imgur.com/4JmQCIt.png",
+      "streams": []
+    },
+    {
+      "id": "kykNETkie.za",
+      "name": "kykNET&kie",
+      "streams": []
+    }
+  ]
+}

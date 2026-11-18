@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">GemakTV</string>
+  <string name="ok">OK</string>
+
+  <string name="banner_hint">▲ ▼  change channel     ●  OK  for the menu</string>
+  <string name="channel_number">CHANNEL %1$d</string>
+
+  <string name="menu_channels">Channels</string>
+  <string name="menu_help">Press BACK to go back to the TV.</string>
+  <string name="check_channels">Check For Updated Channel List</string>
+  <string name="check_updates">Check For Updates</string>
+  <string name="now_playing">ON NOW</string>
+  <string name="channel_ready">Press OK to watch</string>
+  <string name="channel_not_set_up">Not set up yet</string>
+
+  <string name="tuning">Tuning in to %1$s…</string>
+  <string name="tuning_alternative">Trying another connection (%1$d of %2$d)</string>
+  <string name="unavailable_title">%1$s is not available right now</string>
+  <string name="unavailable_detail">We will keep trying by ourselves.\nPress ▲ or ▼ to watch another channel.</string>
+  <string name="not_set_up_title">%1$s is not set up yet</string>
+  <string name="not_set_up_detail">Your family can add it from the GemakTV Manager.\nPress ▲ or ▼ to watch another channel.</string>
+  <string name="no_channels_title">No channels yet</string>
+  <string name="no_channels_detail">Press OK, then choose “Check For Updated Channel List”.</string>
+  <string name="no_internet_title">No internet connection</string>
+  <string name="no_internet_detail">The TV will start again by itself as soon as the internet is back.</string>
+
+  <string name="checking_channels">Checking for new channels…</string>
+  <string name="channels_updated">Your channel list was updated</string>
+  <string name="channels_now">You now have %1$d channels.</string>
+  <string name="channels_same">Your channel list is up to date</string>
+  <string name="channels_same_detail">There are no new channels right now.</string>
+  <string name="check_failed">Could not check right now</string>
+  <string name="check_failed_detail">Please make sure the internet is working, then try again.</string>
+
+  <string name="checking_updates">Checking for updates…</string>
+  <string name="app_up_to_date">GemakTV is up to date</string>
+  <string name="app_up_to_date_detail">You have the latest version (%1$s).</string>
+  <string name="downloading_update">Downloading the update…</string>
+  <string name="downloading_detail">Version %1$s. Please wait, this can take a few minutes.</string>
+  <string name="installing_update">Installing the update…</string>
+  <string name="installing_detail">GemakTV will restart by itself in a moment.</string>
+  <string name="confirm_install_detail">Press OK on the next screen to install it.</string>
+  <string name="update_failed">The update did not work</string>
+  <string name="update_failed_detail">Nothing was changed. Please try again later.</string>
+
+  <string name="maintenance_title">Maintenance</string>
+  <string name="maint_wifi">Wi-Fi settings</string>
+  <string name="maint_settings">All Android settings</string>
+  <string name="maint_exit">Turn kiosk mode off (until restart)</string>
+  <string name="maint_close">Close</string>
+</resources>

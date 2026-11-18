@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Desktop tool for the owner: creates the signing key, publishes the first channel list and releases new TV app builds. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GemakTV.Publisher</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\GemakTV.Infrastructure\GemakTV.Infrastructure.csproj" />
+  </ItemGroup>
+  <Import Project="..\..\build\Secrets.props" />
+</Project>

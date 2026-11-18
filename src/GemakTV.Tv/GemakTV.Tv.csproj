@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- The TV app: a single-app kiosk that plays IPTV channels. Presentation and Android adapters only;
+       the rules live in Domain/Application and the I/O in Infrastructure. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>GemakTV.Tv</RootNamespace>
+    <ApplicationId>io.github.ryusch.gemaktv</ApplicationId>
+    <ApplicationTitle>GemakTV</ApplicationTitle>
+    <!-- Bump both for every release; the TV only installs a higher ApplicationVersion. -->
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0.0</ApplicationDisplayVersion>
+    <!-- MyGica boxes run 32-bit ARM Android (arm64 boxes run it too). Pass -p:GemakEmulator=true to add x86
+         for the Android 6 TV emulator; that build is larger and is never published. -->
+    <RuntimeIdentifiers>android-arm</RuntimeIdentifiers>
+    <RuntimeIdentifiers Condition="'$(GemakEmulator)' == 'true'">android-arm;android-x86</RuntimeIdentifiers>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidUseAapt2>true</AndroidUseAapt2>
+    <GemakEmbedConfigKey>true</GemakEmbedConfigKey>
+    <GemakSignApk>true</GemakSignApk>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <TrimMode>partial</TrimMode>
+    <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.AndroidX.Media3.ExoPlayer" Version="1.11.1" />
+    <PackageReference Include="Xamarin.AndroidX.Media3.ExoPlayer.Hls" Version="1.11.1" />
+    <PackageReference Include="Xamarin.AndroidX.Media3.UI" Version="1.11.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GemakTV.Infrastructure\GemakTV.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\..\build\Secrets.props" />
+</Project>

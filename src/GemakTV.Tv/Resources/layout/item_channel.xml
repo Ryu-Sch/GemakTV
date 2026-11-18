@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:background="@drawable/card_selector"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:minHeight="116dp"
+    android:orientation="horizontal"
+    android:padding="14dp">
+
+  <TextView
+      android:id="@+id/channel_number"
+      android:layout_width="64dp"
+      android:layout_height="wrap_content"
+      android:duplicateParentState="true"
+      android:gravity="center"
+      android:textColor="@color/card_text"
+      android:textSize="34sp"
+      android:textStyle="bold" />
+
+  <FrameLayout
+      android:layout_width="88dp"
+      android:layout_height="88dp"
+      android:layout_marginStart="8dp"
+      android:background="@drawable/logo_frame">
+
+    <ImageView
+        android:id="@+id/channel_logo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/channel_letter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@color/ink"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+  </FrameLayout>
+
+  <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="24dp"
+      android:layout_weight="1"
+      android:duplicateParentState="true"
+      android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/channel_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:duplicateParentState="true"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/card_text"
+        android:textSize="32sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/channel_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:duplicateParentState="true"
+        android:textColor="@color/card_subtext"
+        android:textSize="21sp" />
+  </LinearLayout>
+
+  <TextView
+      android:id="@+id/channel_live"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="12dp"
+      android:background="@drawable/now_playing_badge"
+      android:paddingStart="14dp"
+      android:paddingEnd="14dp"
+      android:paddingTop="4dp"
+      android:paddingBottom="4dp"
+      android:text="@string/now_playing"
+      android:textColor="@android:color/white"
+      android:textSize="18sp"
+      android:textStyle="bold"
+      android:visibility="gone" />
+</LinearLayout>
