@@ -1,6 +1,6 @@
 using Android.Runtime;
 using GemakTV.Tv.Kiosk;
-using GemakTV.Tv.Net;
+using GemakTV.Platform;
 
 namespace GemakTV.Tv;
 

@@ -6,7 +6,7 @@ using Android.Views;
 using Android.Widget;
 using GemakTV.Domain;
 
-namespace GemakTV.Tv.Ui;
+namespace GemakTV.Platform;
 
 /// <summary>
 /// Channel logos, downloaded once and kept in app storage so they still show without internet.
@@ -18,14 +18,16 @@ public sealed class LogoLoader(Context context, HttpClient http)
     private readonly System.Collections.Concurrent.ConcurrentDictionary<string, Bitmap?> _memory = new();
     private readonly string _directory = System.IO.Path.Combine(context.FilesDir!.AbsolutePath, "logos");
 
-    public void Bind(ImageView image, TextView letter, Channel channel)
+    public void Bind(ImageView image, TextView letter, Channel channel) => Bind(image, letter, channel.Name, channel.LogoUrl);
+
+    public void Bind(ImageView image, TextView letter, string name, string? logoUrl)
     {
-        letter.Text = channel.Name.Length > 0 ? channel.Name[..1].ToUpperInvariant() : "?";
+        letter.Text = name.Length > 0 ? name[..1].ToUpperInvariant() : "?";
         letter.Visibility = ViewStates.Visible;
         image.SetImageDrawable(null);
-        image.Tag = channel.LogoUrl;
-        if (channel.LogoUrl is null) return;
-        _ = BindAsync(image, letter, channel.LogoUrl);
+        image.Tag = logoUrl;
+        if (logoUrl is null) return;
+        _ = BindAsync(image, letter, logoUrl);
     }
 
     public void Prefetch(Lineup lineup)

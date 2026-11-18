@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GemakTV.Infrastructure\GemakTV.Infrastructure.csproj" />
+    <ProjectReference Include="..\GemakTV.Platform\GemakTV.Platform.csproj" />
   </ItemGroup>
 
   <Import Project="..\..\build\Secrets.props" />

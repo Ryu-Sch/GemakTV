@@ -32,7 +32,7 @@ public sealed record LineupDiff(
         var parts = new List<string>();
         if (Added.Count > 0) parts.Add($"Added: {Names(Added)}.");
         if (Removed.Count > 0) parts.Add($"Removed: {Names(Removed)}.");
-        if (Updated.Count > 0) parts.Add($"Improved: {Names(Updated)}.");
+        if (Updated.Count > 0) parts.Add($"Updated: {Names(Updated)}.");
         if (parts.Count == 0) parts.Add("The channel order was changed.");
         return string.Join(" ", parts);
     }

@@ -7,7 +7,7 @@ using GemakTV.Infrastructure.GitHub;
 using GemakTV.Infrastructure.Serialization;
 using GemakTV.Infrastructure.Storage;
 using GemakTV.Tv.Kiosk;
-using GemakTV.Tv.Ui;
+using GemakTV.Platform;
 using Xamarin.Android.Net;
 
 namespace GemakTV.Tv;

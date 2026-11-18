@@ -46,7 +46,7 @@ public class LineupTests
         Assert.Equal(["kykNETkie.za"], diff.Added.Select(c => c.Id));
         Assert.Equal(["SABC2.za"], diff.Removed.Select(c => c.Id));
         Assert.Equal(["KykNet.za"], diff.Updated.Select(c => c.Id));
-        Assert.Equal("Added: kykNETkie. Removed: SABC2. Improved: KykNet.", diff.Describe());
+        Assert.Equal("Added: kykNETkie. Removed: SABC2. Updated: KykNet.", diff.Describe());
     }
 
     [Fact]

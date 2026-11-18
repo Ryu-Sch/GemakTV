@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Android plumbing shared by the TV and manager apps: extra trusted root CAs for old Android, channel logo cache. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
+    <RootNamespace>GemakTV.Platform</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\certs\*" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GemakTV.Domain\GemakTV.Domain.csproj" />
+  </ItemGroup>
+</Project>

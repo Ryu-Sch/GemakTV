@@ -26,15 +26,19 @@
     <item name="android:textColor">@color/card_text</item>
     <item name="android:drawablePadding">24dp</item>
     <item name="android:drawableTint">@color/card_text</item>
+    <item name="android:hyphenationFrequency">none</item>
+    <item name="android:breakStrategy">simple</item>
   </style>
 
   <style name="Title">
+    <item name="android:hyphenationFrequency">none</item>
     <item name="android:textSize">34sp</item>
     <item name="android:textStyle">bold</item>
     <item name="android:textColor">@color/text_primary</item>
   </style>
 
   <style name="Body">
+    <item name="android:hyphenationFrequency">none</item>
     <item name="android:textSize">24sp</item>
     <item name="android:textColor">@color/text_secondary</item>
     <item name="android:lineSpacingMultiplier">1.15</item>

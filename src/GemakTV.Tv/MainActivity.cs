@@ -257,6 +257,7 @@ public sealed class MainActivity : Activity
     {
         RunOnUiThread(() =>
         {
+            if (IsVisible(_menu)) return; // the menu covers it; HideMenu re-applies the latest status
             var name = status.Channel?.Name ?? "";
             switch (status.Phase)
             {
@@ -324,6 +325,7 @@ public sealed class MainActivity : Activity
     {
         _bannerToken++;
         _banner.Visibility = ViewStates.Gone;
+        _statusCard.Visibility = ViewStates.Gone; // shown again when the menu closes
         var now = DateTime.Now;
         _menuClock.Text = now.ToString("HH:mm");
         _menuDate.Text = now.ToString("dddd d MMMM");
@@ -368,6 +370,7 @@ public sealed class MainActivity : Activity
     private void HideMenu()
     {
         _menu.Visibility = ViewStates.Gone;
+        if (_player is not null) OnPlaybackStatus(_player.Status);
         ShowBanner();
     }
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="brand">#155E75</color>
+  <color name="brand_dark">#0C3442</color>
+  <color name="amber">#FFC531</color>
+  <color name="ink">#14161C</color>
+  <color name="muted">#5B6472</color>
+  <color name="good">#1E7D32</color>
+  <color name="warn">#A15C00</color>
+  <color name="bad">#B3261E</color>
+  <color name="logo_frame">#FFFFFF</color>
+  <color name="divider">#1F000000</color>
+</resources>

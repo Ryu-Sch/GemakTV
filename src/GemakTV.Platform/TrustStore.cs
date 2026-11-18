@@ -4,7 +4,7 @@ using Java.Security;
 using Java.Security.Cert;
 using Javax.Net.Ssl;
 
-namespace GemakTV.Tv.Net;
+namespace GemakTV.Platform;
 
 /// <summary>
 /// Android 6 shipped in 2015 and does not trust certificate authorities that many sites use today, most notably

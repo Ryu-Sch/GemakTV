@@ -7,6 +7,6 @@
   <color name="surface_card">#F0181C24</color>
   <color name="text_primary">#FFFFFF</color>
   <color name="text_secondary">#B8C0CC</color>
-  <color name="scrim">#E6080A0F</color>
+  <color name="scrim">#F2080A0F</color>
   <color name="danger">#FF8A80</color>
 </resources>

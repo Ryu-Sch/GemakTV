@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="ManagerTheme" parent="Theme.Material3.Light.NoActionBar">
+    <item name="colorPrimary">@color/brand</item>
+    <item name="colorOnPrimary">#FFFFFF</item>
+    <item name="colorPrimaryContainer">#CDEBF4</item>
+    <item name="colorOnPrimaryContainer">#062B37</item>
+    <item name="colorSecondary">@color/amber</item>
+    <item name="colorOnSecondary">#14161C</item>
+    <item name="colorSecondaryContainer">#FFEFC2</item>
+    <item name="colorOnSecondaryContainer">#3A2C00</item>
+    <item name="colorTertiary">#7A5900</item>
+    <item name="colorSurface">#FAFBFC</item>
+    <item name="android:colorBackground">#F2F4F7</item>
+    <item name="colorError">#B3261E</item>
+    <item name="android:statusBarColor">@color/brand_dark</item>
+    <item name="android:windowLightStatusBar">false</item>
+  </style>
+
+  <style name="Toolbar" parent="Widget.Material3.Toolbar">
+    <item name="android:background">@color/brand</item>
+    <item name="titleTextColor">#FFFFFF</item>
+    <item name="subtitleTextColor">#CCFFFFFF</item>
+    <item name="navigationIconTint">#FFFFFF</item>
+  </style>
+</resources>
