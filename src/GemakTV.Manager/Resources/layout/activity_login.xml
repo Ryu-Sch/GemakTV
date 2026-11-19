@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/login_username"
-        app:startIconDrawable="@drawable/ic_tv">
+        app:startIconDrawable="@drawable/ic_person">
 
       <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/username"

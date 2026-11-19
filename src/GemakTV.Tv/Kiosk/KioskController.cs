@@ -182,9 +182,12 @@ public sealed class KioskController(Context context, TvPreferences prefs)
             "com.android.systemui", "com.google.android.gms", "com.google.android.gsf",
             "com.android.managedprovisioning", "com.android.shell",
         };
-        var inputMethods = (Android.Views.InputMethods.InputMethodManager?)context.GetSystemService(Context.InputMethodService);
-        foreach (var ime in inputMethods?.InputMethodList ?? [])
-            if (ime.PackageName is { } name)
+        // Keyboards, found by their input-method service. Including hidden apps matters: a keyboard hidden by an
+        // older version no longer shows up in the system's keyboard list, so it would never come back otherwise.
+        var keyboards = context.PackageManager!.QueryIntentServices(
+            new Intent("android.view.InputMethod"), PackageInfoFlags.MatchUninstalledPackages | PackageInfoFlags.MatchDisabledComponents);
+        foreach (var info in keyboards)
+            if (info.ServiceInfo?.PackageName is { } name)
                 keep.Add(name);
         foreach (var action in new[] { Android.Provider.Settings.ActionSettings, Android.Provider.Settings.ActionWifiSettings })
             foreach (var info in context.PackageManager!.QueryIntentActivities(new Intent(action), 0))

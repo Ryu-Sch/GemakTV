@@ -10,7 +10,7 @@ using Google.Android.Material.TextField;
 namespace GemakTV.Manager;
 
 /// <summary>One channel: its streams in the order the TV tries them, their health, and adding your own stream address.</summary>
-[Activity(Name = "io.github.ryusch.gemaktv.manager.ChannelActivity", Label = "Channel", WindowSoftInputMode = SoftInput.AdjustResize)]
+[Activity(Name = "io.github.ryusch.gemaktv.manager.ChannelActivity", Label = "Channel", WindowSoftInputMode = SoftInput.AdjustResize | SoftInput.StateHidden)]
 public sealed class ChannelActivity : AppCompatActivity
 {
     public const string ChannelIdExtra = "channel";

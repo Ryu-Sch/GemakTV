@@ -212,7 +212,13 @@ async Task<int> Release()
 {
     var location = GitHubLocation.Parse(options.Get("repo") ?? typeof(Secrets).Assembly.GetCustomAttributes(typeof(System.Reflection.AssemblyMetadataAttribute), false)
         .Cast<System.Reflection.AssemblyMetadataAttribute>().First(a => a.Key == "GemakRepo").Value!);
-    var token = Token();
+    if (options.Get("api") is { } api)
+    {
+        // A GitHub stand-in such as tools/GemakTV.FakeGitHub, for testing.
+        var apiBase = new Uri(api.TrimEnd('/') + "/");
+        location = location with { ApiBase = apiBase, RawBase = new Uri(apiBase, "raw/") };
+    }
+    var token = options.Get("api") is not null ? options.Get("token") ?? "test-token" : Token();
     if (needsToken && token is null)
         throw new InvalidOperationException("No GitHub access: set GITHUB_TOKEN or sign in with 'gh auth login'.");
     var client = new GitHubClient(new HttpClient { Timeout = TimeSpan.FromMinutes(5) }, location, token);
