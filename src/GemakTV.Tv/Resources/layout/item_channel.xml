@@ -63,28 +63,40 @@
         android:textSize="32sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/channel_status"
-        android:layout_width="wrap_content"
+    <!-- The "ON NOW" badge sits under the name, so the name keeps the full width of the card. -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:duplicateParentState="true"
-        android:textColor="@color/card_subtext"
-        android:textSize="21sp" />
-  </LinearLayout>
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-  <TextView
-      android:id="@+id/channel_live"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="12dp"
-      android:background="@drawable/now_playing_badge"
-      android:paddingStart="14dp"
-      android:paddingEnd="14dp"
-      android:paddingTop="4dp"
-      android:paddingBottom="4dp"
-      android:text="@string/now_playing"
-      android:textColor="@android:color/white"
-      android:textSize="18sp"
-      android:textStyle="bold"
-      android:visibility="gone" />
+      <TextView
+          android:id="@+id/channel_live"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginEnd="12dp"
+          android:background="@drawable/now_playing_badge"
+          android:paddingStart="12dp"
+          android:paddingEnd="12dp"
+          android:paddingTop="2dp"
+          android:paddingBottom="2dp"
+          android:text="@string/now_playing"
+          android:textColor="@android:color/white"
+          android:textSize="17sp"
+          android:textStyle="bold"
+          android:visibility="gone" />
+
+      <TextView
+          android:id="@+id/channel_status"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:duplicateParentState="true"
+          android:ellipsize="end"
+          android:maxLines="1"
+          android:textColor="@color/card_subtext"
+          android:textSize="21sp" />
+    </LinearLayout>
+  </LinearLayout>
 </LinearLayout>

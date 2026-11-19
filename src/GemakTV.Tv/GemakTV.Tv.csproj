@@ -9,8 +9,8 @@
     <ApplicationId>io.github.ryusch.gemaktv</ApplicationId>
     <ApplicationTitle>GemakTV</ApplicationTitle>
     <!-- Bump both for every release; the TV only installs a higher ApplicationVersion. -->
-    <ApplicationVersion>5</ApplicationVersion>
-    <ApplicationDisplayVersion>1.0.4</ApplicationDisplayVersion>
+    <ApplicationVersion>8</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0.7</ApplicationDisplayVersion>
     <!-- MyGica boxes run 32-bit ARM Android (arm64 boxes run it too). Pass -p:GemakEmulator=true to add x86
          for the Android 6 TV emulator; that build is larger and is never published. -->
     <RuntimeIdentifiers>android-arm</RuntimeIdentifiers>

@@ -50,6 +50,6 @@
   <string name="maintenance_title">Maintenance</string>
   <string name="maint_wifi">Wi-Fi settings</string>
   <string name="maint_settings">All Android settings</string>
-  <string name="maint_exit">Turn kiosk mode off (until restart)</string>
+  <string name="maint_exit">Kiosk off for 30 min</string>
   <string name="maint_close">Close</string>
 </resources>

@@ -237,7 +237,13 @@ public sealed partial class PlayerController : Java.Lang.Object, IPlayerListener
     private void StopPlayer()
     {
         _started = false;
-        try { _player?.Stop(); } catch (Java.Lang.Exception) { }
+        try
+        {
+            _player?.Stop();
+            // Without this the previous channel's last frame stays frozen on screen behind the message.
+            _player?.ClearMediaItems();
+        }
+        catch (Java.Lang.Exception) { }
     }
 
     private void Emit(PlaybackStatus status)
