@@ -43,6 +43,9 @@
   <string name="confirm_install_detail">Press OK on the next screen to install it.</string>
   <string name="update_failed">The update did not work</string>
   <string name="update_failed_detail">Nothing was changed. Please try again later.</string>
+  <string name="update_cancelled_detail">The update was not installed. Nothing was changed.</string>
+  <string name="updates_blocked">Updates are not switched on yet</string>
+  <string name="updates_blocked_detail">A helper needs to allow “Unknown sources” once:\nSettings → Security → Unknown sources.</string>
 
   <string name="maintenance_title">Maintenance</string>
   <string name="maint_wifi">Wi-Fi settings</string>

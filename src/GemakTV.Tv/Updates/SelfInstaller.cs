@@ -33,6 +33,19 @@ public static class SelfInstaller
         return same ? null : "The download is not signed with GemakTV's key.";
     }
 
+    /// <summary>
+    /// False when Android will refuse the install outright: without device owner, installing an app from
+    /// outside an app store needs "Unknown sources" (Android 6/7) or the per-app install permission (8+).
+    /// </summary>
+    public static bool CanInstall(Context context, bool isDeviceOwner)
+    {
+        if (isDeviceOwner) return true;
+        if (Build.VERSION.SdkInt >= BuildVersionCodes.O) return context.PackageManager!.CanRequestPackageInstalls();
+#pragma warning disable CA1422, CS0618 // the Android 6/7 setting
+        return Android.Provider.Settings.Secure.GetInt(context.ContentResolver, Android.Provider.Settings.Secure.InstallNonMarketApps, 0) == 1;
+#pragma warning restore CA1422, CS0618
+    }
+
     public static void Install(Context context, string apkPath)
     {
         var installer = context.PackageManager!.PackageInstaller;

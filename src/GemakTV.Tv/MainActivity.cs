@@ -44,6 +44,8 @@ public sealed class MainActivity : Activity
     private bool _initialized;
     private bool _busy;
     private int _bannerToken;
+    private int _installToken;
+    private bool _awaitingInstallConfirmation;
     private string _digits = "";
     private int _digitsToken;
     private View? _focusBeforeDialog;
@@ -116,6 +118,14 @@ public sealed class MainActivity : Activity
         base.OnResume();
         HideSystemUi();
         Services.Kiosk.EnterLockTask(this);
+        if (_awaitingInstallConfirmation)
+        {
+            // Back from Android's install screen without the app being replaced: it was cancelled.
+            // (Android 6 sends no result in that case.)
+            _awaitingInstallConfirmation = false;
+            _installToken++;
+            ShowDialog(DialogKind.Error, GetString(Resource.String.update_failed), GetString(Resource.String.update_cancelled_detail));
+        }
     }
 
     protected override void OnStop()
@@ -171,8 +181,15 @@ public sealed class MainActivity : Activity
                 if (up) CloseTopOverlay();
                 return true;
             }
-            if (down && e.RepeatCount == 0 && IsVisible(_menu) && !IsVisible(_dialog)) TrackSecretCode(key);
+            var menuOnly = IsVisible(_menu) && !IsVisible(_dialog) && !IsVisible(_maintenance);
+            if (down && e.RepeatCount == 0 && menuOnly) TrackSecretCode(key);
             if (IsVisible(_dialog) && _dialogButton.Visibility != ViewStates.Visible) return true; // busy: wait
+            // ◀ ▶ always jump between the channel column and the button column, wherever focus is.
+            if (menuOnly && key is Keycode.DpadRight or Keycode.DpadLeft)
+            {
+                if (down) SwitchMenuColumn(toButtons: key == Keycode.DpadRight);
+                return true;
+            }
             return isNavigation ? base.DispatchKeyEvent(e) : true;
         }
 
@@ -367,6 +384,17 @@ public sealed class MainActivity : Activity
         return currentCard;
     }
 
+    private void SwitchMenuColumn(bool toButtons)
+    {
+        if (toButtons)
+        {
+            if (CurrentFocus != _checkUpdatesButton) _checkChannelsButton.RequestFocus();
+            return;
+        }
+        var index = Math.Max(0, _navigator.CurrentIndex);
+        if (index < _channelList.ChildCount) _channelList.GetChildAt(index)!.RequestFocus();
+    }
+
     private void HideMenu()
     {
         _menu.Visibility = ViewStates.Gone;
@@ -446,6 +474,12 @@ public sealed class MainActivity : Activity
             }
 
             var release = check.Release!;
+            if (!SelfInstaller.CanInstall(this, Services.Kiosk.IsDeviceOwner))
+            {
+                // Without device owner Android 6 refuses with a confusing "Install blocked" screen; explain instead.
+                ShowDialog(DialogKind.Error, GetString(Resource.String.updates_blocked), GetString(Resource.String.updates_blocked_detail));
+                return;
+            }
             ShowDialog(DialogKind.Progress, GetString(Resource.String.downloading_update), GetString(Resource.String.downloading_detail, release.VersionName));
             var path = Path.Combine(CacheDir!.AbsolutePath, "updates", $"GemakTV-{release.VersionCode}.apk");
             var progress = new Progress<double>(p => _dialogProgress.Progress = (int)(p * 1000));
@@ -461,7 +495,14 @@ public sealed class MainActivity : Activity
 
             ShowDialog(DialogKind.Busy, GetString(Resource.String.installing_update), GetString(Resource.String.installing_detail));
             await Task.Run(() => SelfInstaller.Install(this, path));
-            // InstallResultReceiver reports back; on success Android replaces and restarts the app.
+            // InstallResultReceiver reports back; on success Android replaces and restarts the app. If nothing
+            // happens at all, do not leave the viewer looking at "Installing…" forever.
+            var token = ++_installToken;
+            _handler.PostDelayed(() =>
+            {
+                if (token == _installToken && IsVisible(_dialog) && _dialogButton.Visibility != ViewStates.Visible)
+                    ShowDialog(DialogKind.Error, GetString(Resource.String.update_failed), GetString(Resource.String.update_failed_detail));
+            }, (long)TimeSpan.FromMinutes(3).TotalMilliseconds);
         }
         catch (Exception ex)
         {
@@ -479,9 +520,12 @@ public sealed class MainActivity : Activity
         switch (outcome)
         {
             case InstallOutcome.WaitingForUser:
+                _awaitingInstallConfirmation = true;
                 ShowDialog(DialogKind.Busy, GetString(Resource.String.installing_update), GetString(Resource.String.confirm_install_detail));
                 break;
             case InstallOutcome.Failed:
+                _installToken++;
+                _awaitingInstallConfirmation = false;
                 ShowDialog(DialogKind.Error, GetString(Resource.String.update_failed), GetString(Resource.String.update_failed_detail) + (message is null ? "" : $"\n({message})"));
                 break;
         }
@@ -605,9 +649,11 @@ public sealed class MainActivity : Activity
 
     private void HideSystemUi()
     {
-#pragma warning disable CA1422, CS0618 // immersive flags are the Android 6 API
+        // "Lean back" full screen (no IMMERSIVE flag): meant for video, and unlike immersive mode it never shows
+        // Android's "Viewing full screen - swipe down to exit / GOT IT" prompt, which a viewer would have to dismiss.
+#pragma warning disable CA1422, CS0618 // system UI flags are the Android 6 API
         Window!.DecorView.SystemUiVisibility = (StatusBarVisibility)(SystemUiFlags.Fullscreen | SystemUiFlags.HideNavigation
-            | SystemUiFlags.ImmersiveSticky | SystemUiFlags.LayoutStable | SystemUiFlags.LayoutFullscreen | SystemUiFlags.LayoutHideNavigation);
+            | SystemUiFlags.LayoutStable | SystemUiFlags.LayoutFullscreen | SystemUiFlags.LayoutHideNavigation);
 #pragma warning restore CA1422, CS0618
     }
 

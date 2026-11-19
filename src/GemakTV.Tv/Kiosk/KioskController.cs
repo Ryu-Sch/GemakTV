@@ -110,6 +110,21 @@ public sealed class KioskController(Context context, TvPreferences prefs)
     {
         var keep = PackagesToKeep();
         var hidden = new HashSet<string>(prefs.HiddenPackages);
+
+        // Show again anything an earlier version hid but that is now on the keep list.
+        foreach (var package in hidden.Where(keep.Contains).ToList())
+        {
+            try
+            {
+                _dpm.SetApplicationHidden(_admin, package, false);
+                hidden.Remove(package);
+                Log.Info(Tag, $"Unhid {package}");
+            }
+            catch (Java.Lang.Exception ex)
+            {
+                Log.Warn(Tag, $"Could not unhide {package}: {ex.Message}");
+            }
+        }
         foreach (var package in LauncherPackages())
         {
             if (keep.Contains(package) || hidden.Contains(package)) continue;
@@ -153,7 +168,10 @@ public sealed class KioskController(Context context, TvPreferences prefs)
         return packages;
     }
 
-    /// <summary>Settings and the package installer stay, so a helper can fix Wi-Fi and updates can install.</summary>
+    /// <summary>
+    /// Settings, keyboards and the package installer stay, so a helper can fix Wi-Fi (and type its password)
+    /// and updates can install.
+    /// </summary>
     private HashSet<string> PackagesToKeep()
     {
         var keep = new HashSet<string>
@@ -162,7 +180,12 @@ public sealed class KioskController(Context context, TvPreferences prefs)
             "com.android.settings", "com.android.tv.settings", "com.google.android.tv.settings",
             "com.android.packageinstaller", "com.google.android.packageinstaller",
             "com.android.systemui", "com.google.android.gms", "com.google.android.gsf",
+            "com.android.managedprovisioning", "com.android.shell",
         };
+        var inputMethods = (Android.Views.InputMethods.InputMethodManager?)context.GetSystemService(Context.InputMethodService);
+        foreach (var ime in inputMethods?.InputMethodList ?? [])
+            if (ime.PackageName is { } name)
+                keep.Add(name);
         foreach (var action in new[] { Android.Provider.Settings.ActionSettings, Android.Provider.Settings.ActionWifiSettings })
             foreach (var info in context.PackageManager!.QueryIntentActivities(new Intent(action), 0))
                 if (info.ActivityInfo?.PackageName is { } name)
